@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class Main {
@@ -53,6 +52,20 @@ public class Main {
                 return false;
         }
         return true;
+    }
+
+    // Function to calculate the total cost of a graph
+    static int totalCost(int[][] graph) {
+        int total = 0;
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = i + 1; j < graph.length; j++) {
+                if (graph[i][j] != INF) { // If there is an edge, add the cost to the total
+                    total += graph[i][j];
+                }
+            }
+        }
+        return total;
+
     }
 
     // Function to calculate the total cost of a subset of edges
@@ -214,6 +227,7 @@ public class Main {
             int[][] graph = generateRandomGraph(V);
 
             System.out.println("\nNumber of vertices: " + V);
+            System.out.println("Total cost: " + totalCost(graph));
             // System.out.println("Graph: " + Arrays.deepToString(graph));
 
             long startTime, endTime;
@@ -241,7 +255,8 @@ public class Main {
             System.out.println("Execution time of kruskal in nanoseconds: " + durKNano);
             System.out.println("Execution time of kruskal in milliseconds: " + durKMillis);
             double improvement = 100.0 * Math.max(0, (durBFNano / durKNano - 1));
-            System.out.printf("Percentage of improvement in time by kruskal over brute force (Nanoseconds): %.2f%%\n" , improvement);
+            System.out.printf("Percentage of improvement in time by kruskal over brute force (Nanoseconds): %.2f%%\n",
+                    improvement);
 
         }
     }
