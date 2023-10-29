@@ -1,0 +1,53 @@
+Function kruskal(graph):
+    V <- number of vertices in the graph
+    e <- 0
+    cost <- 0
+
+    Create an empty list edgeList
+    For i <- 0 to V - 1:
+        For j <- i + 1 to V - 1:
+            If graph[i][j] is not ∞:
+                Add {i, j, graph[i][j]} to edgeList
+
+    Convert edgeList to a 2D array edges
+    Call mergeSort on edges
+
+    Initialize parent array such that parent[v] <- v for all v
+
+    For each edge in edges:
+        If e equals V - 1, break the loop
+
+        x <- find(parent, edge[0])
+        y <- find(parent, edge[1])
+
+        If x is not equal to y:
+            Increment e by 1
+            Add edge[2] to cost
+            Call union on parent, x, and y
+
+    Return cost
+
+Function find(parent, i):
+    If parent[i] equals i:
+        Return i
+    Else:
+        Return find(parent, parent[i])
+
+Function union(parent, x, y):
+    xroot <- find(parent, x)
+    yroot <- find(parent, y)
+    parent[yroot] <- xroot
+
+Function mergeSort(edges, left, right):
+    If left is less than right:
+        mid <- left + (right - left) / 2
+        Call mergeSort on edges from left to mid
+        Call mergeSort on edges from mid + 1 to right
+        Call merge on edges from left to mid to right
+
+Function merge(edges, left, mid, right):
+    Create temporary arrays L and R for left and right halves of edges
+
+    Copy data from edges to L and R
+
+    Merge L and R back into edges[left...right] in sorted order
