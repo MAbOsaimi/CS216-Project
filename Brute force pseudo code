@@ -1,0 +1,40 @@
+Function bruteForce(graph):
+    V <- number of vertices in the graph
+    E <- number of edges in the graph
+
+    Initialize subset as a VxV matrix of false values
+    minCost <- ∞
+
+    For i <- 0 to 2^E - 1:
+        Generate the subset of edges
+        If the subset forms a connected graph:
+            minCost <- min(minCost, totalCost(graph, subset))
+    
+    Return minCost
+
+Function totalCost(graph, subset):
+    total <- 0
+    For each pair of vertices (i, j) in the graph:
+        If the pair is in the subset:
+            total <- total + cost of the edge
+    Return total
+
+Function isConnected(graph, subset):
+    V <- number of vertices in the graph
+    Initialize visited as a list of V false values
+
+    Create a stack and push vertex 0 onto it
+    visited[0] <- true
+
+    While stack is not empty:
+        u <- pop from stack
+        For v <- 0 to V - 1:
+            If subset[u][v] is true and visited[v] is false:
+                Push v onto stack
+                visited[v] <- true
+    
+    For v <- 0 to V - 1:
+        If visited[v] is false:
+            Return false
+    
+    Return true
